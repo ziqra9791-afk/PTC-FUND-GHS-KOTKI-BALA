@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>GHS Kotki Bala PTC Fund</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0D5328">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PTC Fund">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <style>
+    /* Design System - GHS Kotki Bala PTC Fund */
+    :root {
+      --primary: #0D5328;
+      --primary-dark: #08381A;
+      --primary-light: #16743A;
+      --primary-surface: #EAF4EE;
+      --accent-gold: #C98A16;
+      --accent-gold-light: #F7D488;
+      --income-green: #1B873F;
+      --income-bg: #E7F6EC;
+      --expense-red: #C5221F;
+      --expense-bg: #FCE8E6;
+      --bg: #F4F6F5;
+      --surface: #FFFFFF;
+      --text-main: #1C2821;
+      --text-muted: #5A6B61;
+      --border: #D7E0DA;
+      --border-focus: #0D5328;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.14);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: calc(76px + var(--safe-bottom));
+      min-height: 100vh;
+    }
+
+    /* Top Navigation & School Header */
+    .app-header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: #FFFFFF;
+      padding: calc(14px + var(--safe-top)) 16px 14px 16px;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .school-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .school-crest {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      padding: 2px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .school-crest img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .school-text {
+      min-width: 0;
+    }
+
+    .school-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .school-subtitle {
+      font-size: 12px;
+      color: var(--accent-gold-light);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ADE80;
+    }
+
+    .status-dot.offline {
+      background: #FBBF24;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Section Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 110px;
+      background: transparent;
+      border: none;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(13,83,40,0.3);
+    }
+
+    /* Dashboard Metric Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 5px;
+    }
+
+    .metric-card.balance::before { background: var(--accent-gold); }
+    .metric-card.income::before { background: var(--income-green); }
+    .metric-card.expense::before { background: var(--expense-red); }
+
+    .metric-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .metric-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .metric-card.balance .metric-icon-box { background: #FEF3C7; color: #92400E; }
+    .metric-card.income .metric-icon-box { background: var(--income-bg); color: var(--income-green); }
+    .metric-card.expense .metric-icon-box { background: var(--expense-bg); color: var(--expense-red); }
+
+    .metric-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .currency-symbol {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .metric-subtext {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Quick Action Buttons Bar */
+    .actions-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(13,83,40,0.25);
+    }
+
+    .btn-primary:active {
+      background: var(--primary-dark);
+      transform: translateY(1px);
+    }
+
+    .btn-income {
+      background: var(--income-green);
+      color: #FFFFFF;
+    }
+
+    .btn-expense {
+      background: var(--expense-red);
+      color: #FFFFFF;
+    }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--text-main);
+      border-color: var(--border);
+    }
+
+    .btn-outline:active {
+      background: var(--bg);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Search & Filter Section */
+    .filter-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 18px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .search-input-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 12px 10px 38px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--border-focus);
+      background: #FFFFFF;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .pill-btn {
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .filter-controls-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      background: #FFFFFF;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--border-focus);
+    }
+
+    /* Transactions List / Cards */
+    .transactions-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .transactions-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .records-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--border);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .transactions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tx-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .tx-card:active {
+      transform: scale(0.995);
+    }
+
+    .tx-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tx-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .tx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 4px;
+    }
+
+    .tx-badge.income {
+      background: var(--income-bg);
+      color: var(--income-green);
+    }
+
+    .tx-badge.expense {
+      background: var(--expense-bg);
+      color: var(--expense-red);
+    }
+
+    .tx-voucher-chip {
+      font-size: 11px;
+      font-family: monospace;
+      background: var(--bg);
+      color: var(--text-muted);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      margin-left: 4px;
+    }
+
+    .tx-desc {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      word-break: break-word;
+    }
+
+    .tx-category {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .tx-amount-col {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .tx-amount {
+      font-size: 17px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tx-amount.income {
+      color: var(--income-green);
+    }
+
+    .tx-amount.expense {
+      color: var(--expense-red);
+    }
+
+    .tx-date {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .tx-remarks {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--border);
+      word-break: break-word;
+    }
+
+    .tx-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 4px;
+      padding-top: 8px;
+      border-top: 1px solid #F0F3F1;
+    }
+
+    .action-icon-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .action-icon-btn:active {
+      background: var(--bg);
+    }
+
+    .action-icon-btn.danger {
+      color: var(--expense-red);
+      border-color: #F8D7DA;
+    }
+
+    .action-icon-btn.primary {
+      color: var(--primary);
+      border-color: #C8E6C9;
+    }
+
+    /* Empty State */
+    .empty-state {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 40px 20px;
+      text-align: center;
+      border: 1px dashed var(--border);
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .empty-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 12px;
+      color: var(--accent-gold);
+    }
+
+    .empty-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .empty-desc {
+      font-size: 13px;
+      max-width: 360px;
+      margin: 0 auto 16px;
+    }
+
+    /* Floating Action Button (FAB) */
+    .fab-btn {
+      position: fixed;
+      right: 20px;
+      bottom: calc(76px + var(--safe-bottom) + 12px);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 4px 16px rgba(13,83,40,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 90;
+      transition: transform 0.2s ease, background 0.2s;
+    }
+
+    .fab-btn:active {
+      transform: scale(0.92);
+      background: var(--primary-dark);
+    }
+
+    /* Modals & Dialogs */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 200;
+      padding: 0;
+    }
+
+    @media (min-width: 600px) {
+      .modal-backdrop {
+        align-items: center;
+        padding: 20px;
+      }
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background: var(--surface);
+      width: 100%;
+      max-width: 560px;
+      max-height: 90vh;
+      border-top-left-radius: var(--radius-lg);
+      border-top-right-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (min-width: 600px) {
+      .modal-sheet {
+        border-radius: var(--radius-lg);
+        max-height: 85vh;
+      }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--primary-surface);
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-footer {
+      padding: 14px 20px calc(14px + var(--safe-bottom)) 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #FAFAFA;
+    }
+
+    /* Type Selector in Form */
+    .type-toggle-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .type-toggle-btn {
+      padding: 10px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border);
+      background: var(--bg);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .type-toggle-btn.income.selected {
+      border-color: var(--income-green);
+      background: var(--income-bg);
+      color: var(--income-green);
+    }
+
+    .type-toggle-btn.expense.selected {
+      border-color: var(--expense-red);
+      background: var(--expense-bg);
+      color: var(--expense-red);
+    }
+
+    /* Bottom Navigation Bar for Mobile */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(62px + var(--safe-bottom));
+      padding-bottom: var(--safe-bottom);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 80;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+    }
+
+    .bnav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      flex: 1;
+      height: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+
+    .bnav-item.active {
+      color: var(--primary);
+    }
+
+    .bnav-item svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Report & Printable Ledger View */
+    .report-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .report-header {
+      text-align: center;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .report-gov-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .report-school-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 4px 0;
+    }
+
+    .report-fund-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .report-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      background: var(--bg);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 18px;
+      font-size: 13px;
+    }
+
+    .ledger-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .ledger-table th {
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 10px 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .ledger-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .ledger-table tbody tr:nth-child(even) {
+      background: #F9FBF9;
+    }
+
+    .ledger-table tfoot td {
+      background: #EFEFEF;
+      font-weight: 700;
+      border-top: 2px solid var(--text-main);
+    }
+
+    .signature-block {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+      padding-top: 10px;
+      text-align: center;
+    }
+
+    .sig-line {
+      border-top: 1px dashed var(--text-main);
+      padding-top: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sig-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Print Slip Voucher Preview */
+    .voucher-slip {
+      border: 2px solid var(--primary);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: #FFFFFF;
+      margin: 10px 0;
+    }
+
+    .voucher-slip-header {
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .voucher-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .voucher-val {
+      font-weight: 700;
+    }
+
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      top: calc(70px + var(--safe-top));
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #1C2821;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* PRINT STYLES - Crisp Institutional Print */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+
+      .app-header,
+      .nav-tabs,
+      .actions-bar,
+      .filter-card,
+      .tx-actions,
+      .fab-btn,
+      .bottom-nav,
+      .toast,
+      .no-print {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .report-card,
+      .voucher-slip {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+
+      .ledger-table th {
+        background: #222222 !important;
+        color: #FFFFFF !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .ledger-table td,
+      .ledger-table th {
+        border: 1px solid #333333 !important;
+      }
+
+      .signature-block {
+        margin-top: 70px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Institutional Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="school-identity">
+        <div class="school-crest">
+          <img src="icon-192.png" alt="GHS Kotki Bala Crest">
+        </div>
+        <div class="school-text">
+          <h1 class="school-title">GHS Kotki Bala</h1>
+          <div class="school-subtitle">
+            <span>PTC Fund</span>
+            <span>•</span>
+            <span>Hangu, KP</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div id="networkStatusBadge" class="status-badge">
+          <span id="networkStatusDot" class="status-dot"></span>
+          <span id="networkStatusText">Checking</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App Container -->
+  <main class="container">
+
+    <!-- Tab Navigation -->
+    <nav class="nav-tabs no-print" aria-label="Sections">
+      <button class="tab-btn active" onclick="switchTab('dashboard')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        Dashboard
+      </button>
+      <button class="tab-btn" onclick="switchTab('ledger')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Transactions
+      </button>
+      <button class="tab-btn" onclick="switchTab('reports')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+        Audit Report
+      </button>
+      <button class="tab-btn" onclick="switchTab('backup')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+        Backup & Sync
+      </button>
+      <button class="tab-btn" onclick="switchTab('about')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        PTC Rules
+      </button>
+    </nav>
+
+    <!-- TAB 1: DASHBOARD -->
+    <section id="tab-dashboard" class="tab-content">
+      <!-- 3 Key Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card balance">
+          <div class="metric-header">
+            <span class="metric-label">Remaining PTC Balance</span>
+            <div class="metric-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            </div>
+          </div>
+          <div class="metric-value">
+            <span class="currency-symbol">PKR</span>
+            <span id="dashBalance">0.00</span>
+          </div>
+          <div class="metric-subtext" id="dashBalanceStatus">Healthy local account balance</div>
+        </div>
+
+        <div class="metric-card income">
+          <div class="metric-header">
+            <span class="metric-label">Total PTC Income</span>
+            <div class="metric-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+            </div>
+          </div>
+          <div class="metric-value">
+            <span class="currency-symbol">PKR</span>
+            <span id="dashIncome">0.00</span>
+          </div>
+          <div class="metric-subtext" id="dashIncomeCount">0 income receipts</div>
+        </div>
+
+        <div class="metric-card expense">
+          <div class="metric-header">
+            <span class="metric-label">Total PTC Expenses</span>
+            <div class="metric-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/></svg>
+            </div>
+          </div>
+          <div class="metric-value">
+            <span class="currency-symbol">PKR</span>
+            <span id="dashExpense">0.00</span>
+          </div>
+          <div class="metric-subtext" id="dashExpenseCount">0 expense vouchers</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions Bar -->
+      <div class="actions-bar no-print">
+        <button class="btn btn-income" onclick="openTransactionModal('income')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          Record Income
+        </button>
+        <button class="btn btn-expense" onclick="openTransactionModal('expense')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H5v-2h14v2z"/></svg>
+          Record Expense
+        </button>
+        <button class="btn btn-outline" onclick="exportCSV()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Export CSV
+        </button>
+        <button class="btn btn-outline" onclick="switchTab('reports')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Audit Ledger
+        </button>
+      </div>
+
+      <!-- Recent Transactions Preview -->
+      <div class="filter-card">
+        <div class="transactions-header">
+          <h2 class="transactions-title">
+            <span>Recent Activity</span>
+            <span id="recentCount" class="records-count">0</span>
+          </h2>
+          <button class="btn btn-outline btn-sm" onclick="switchTab('ledger')">View All Ledger</button>
+        </div>
+        <div id="recentTransactionsList" class="transactions-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: TRANSACTIONS LEDGER (Search, Filter, Full History) -->
+    <section id="tab-ledger" class="tab-content" style="display:none;">
+      <div class="filter-card no-print">
+        <div class="search-row">
+          <div class="search-input-wrap">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by description, voucher/receipt #, remarks..." oninput="applyFilters()">
+          </div>
+        </div>
+
+        <div class="filter-pills">
+          <button class="pill-btn active" data-type="all" onclick="setTypeFilter('all', this)">All Transactions</button>
+          <button class="pill-btn" data-type="income" onclick="setTypeFilter('income', this)">Income Only</button>
+          <button class="pill-btn" data-type="expense" onclick="setTypeFilter('expense', this)">Expenses Only</button>
+        </div>
+
+        <div class="filter-controls-row">
+          <div class="form-group">
+            <label for="categoryFilter">Category</label>
+            <select id="categoryFilter" class="form-control" onchange="applyFilters()">
+              <option value="all">All Categories</option>
+              <optgroup label="Income Categories">
+                <option value="Govt PTC Grant">Govt PTC Grant</option>
+                <option value="Farogh-e-Taleem Fund (FTF)">Farogh-e-Taleem Fund (FTF)</option>
+                <option value="Community & Donations">Community & Donations</option>
+                <option value="Exam Fee Share">Exam Fee Share</option>
+                <option value="Other Income">Other Income</option>
+              </optgroup>
+              <optgroup label="Expense Categories">
+                <option value="School Purchases">School Purchases</option>
+                <option value="Repairs & Maintenance">Repairs & Maintenance</option>
+                <option value="Stationery & Printing">Stationery & Printing</option>
+                <option value="Furniture & Fixtures">Furniture & Fixtures</option>
+                <option value="Sanitation & Utilities">Sanitation & Utilities</option>
+                <option value="Student Welfare">Student Welfare</option>
+                <option value="Other Expenses">Other Expenses</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="dateFromFilter">From Date</label>
+            <input type="date" id="dateFromFilter" class="form-control" onchange="applyFilters()">
+          </div>
+
+          <div class="form-group">
+            <label for="dateToFilter">To Date</label>
+            <input type="date" id="dateToFilter" class="form-control" onchange="applyFilters()">
+          </div>
+
+          <div class="form-group">
+            <label for="sortBySelect">Sort By</label>
+            <select id="sortBySelect" class="form-control" onchange="applyFilters()">
+              <option value="date-desc">Date (Newest First)</option>
+              <option value="date-asc">Date (Oldest First)</option>
+              <option value="amount-desc">Amount (High to Low)</option>
+              <option value="amount-asc">Amount (Low to High)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="transactions-header">
+        <h2 class="transactions-title">
+          <span>Ledger Records</span>
+          <span id="filteredRecordsCount" class="records-count">0</span>
+        </h2>
+        <div class="no-print">
+          <button class="btn btn-primary btn-sm" onclick="openTransactionModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Add Record
+          </button>
+        </div>
+      </div>
+
+      <div id="transactionsList" class="transactions-container">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- TAB 3: AUDIT REPORT & PRINTABLE LEDGER -->
+    <section id="tab-reports" class="tab-content" style="display:none;">
+      <div class="actions-bar no-print">
+        <button class="btn btn-primary" onclick="triggerPrint()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Print Official Ledger
+        </button>
+        <button class="btn btn-outline" onclick="exportCSV()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Export CSV (Excel)
+        </button>
+      </div>
+
+      <div class="report-card">
+        <div class="report-header">
+          <div class="report-gov-title">Elementary & Secondary Education Department, Khyber Pakhtunkhwa</div>
+          <h2 class="report-school-name">Government High School Kotki Bala Hangu</h2>
+          <div class="report-fund-title">Parent Teacher Council (PTC) Fund Register & Audit Statement</div>
+        </div>
+
+        <div class="report-meta-grid">
+          <div><strong>Fiscal Entity:</strong> GHS Kotki Bala PTC</div>
+          <div><strong>District:</strong> Hangu, KP, Pakistan</div>
+          <div><strong>Report Date:</strong> <span id="reportGenDate">-</span></div>
+          <div><strong>Total Transactions:</strong> <span id="reportTxCount">0</span></div>
+        </div>
+
+        <div class="ledger-table-wrap">
+          <table class="ledger-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Voucher #</th>
+                <th>Description / Payee</th>
+                <th>Category</th>
+                <th style="text-align:right;">Income (PKR)</th>
+                <th style="text-align:right;">Expense (PKR)</th>
+                <th style="text-align:right;">Balance (PKR)</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody">
+              <!-- Rendered rows -->
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4" style="text-align:right;">Totals / Closing Balance:</td>
+                <td id="reportTotalIncome" style="text-align:right; color:var(--income-green);">0.00</td>
+                <td id="reportTotalExpense" style="text-align:right; color:var(--expense-red);">0.00</td>
+                <td id="reportClosingBalance" style="text-align:right; font-weight:800;">0.00</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="signature-block">
+          <div>
+            <div class="sig-line">Headmaster / Chairman PTC</div>
+            <div class="sig-sub">GHS Kotki Bala Hangu</div>
+          </div>
+          <div>
+            <div class="sig-line">Secretary / Incharge PTC</div>
+            <div class="sig-sub">Teacher Representative</div>
+          </div>
+          <div>
+            <div class="sig-line">Parent Member PTC</div>
+            <div class="sig-sub">Community Representative</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: BACKUP & RESTORE -->
+    <section id="tab-backup" class="tab-content" style="display:none;">
+      <div class="filter-card">
+        <h2 style="font-size:16px; font-weight:700; margin-bottom:10px;">Local Data & Backup Management</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">
+          All financial transactions for GHS Kotki Bala PTC Fund are securely stored in your device's local browser database (IndexedDB). No internet connection or cloud server is required. Keep regular backups to prevent accidental data loss.
+        </p>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px;">
+          <!-- Export Card -->
+          <div style="border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; background:var(--bg);">
+            <h3 style="font-size:14px; font-weight:700; margin-bottom:6px;">Create Full Backup</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Download a JSON copy of all transactions, voucher numbers, and categories.</p>
+            <button class="btn btn-primary btn-sm" onclick="downloadJSONBackup()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              Download Backup (.json)
+            </button>
+          </div>
+
+          <!-- Restore Card -->
+          <div style="border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; background:var(--bg);">
+            <h3 style="font-size:14px; font-weight:700; margin-bottom:6px;">Restore from Backup</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Import a previously downloaded PTC Fund JSON file to this device.</p>
+            <input type="file" id="restoreFileInput" accept=".json" style="display:none;" onchange="handleRestoreFile(event)">
+            <button class="btn btn-outline btn-sm" onclick="document.getElementById('restoreFileInput').click()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+              Select Backup File
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; padding:14px; background:var(--primary-surface); border-radius:var(--radius-md); font-size:12px; color:var(--primary-dark);">
+          <strong>Storage Status:</strong> Database: <code>GHSKotkiBalaPTCFundDB</code> • Records: <span id="backupRecordCount">0</span> • Engine: IndexedDB Local Offline
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: ABOUT & PTC GUIDELINES -->
+    <section id="tab-about" class="tab-content" style="display:none;">
+      <div class="filter-card">
+        <h2 style="font-size:17px; font-weight:700; color:var(--primary); margin-bottom:8px;">Government High School Kotki Bala Hangu</h2>
+        <h3 style="font-size:13px; font-weight:600; color:var(--text-muted); margin-bottom:14px;">Parent Teacher Council (PTC) Fund Guidelines</h3>
+
+        <div style="font-size:13px; line-height:1.6; display:flex; flex-direction:column; gap:12px;">
+          <p>
+            The Parent Teacher Council (PTC) at <strong>GHS Kotki Bala Hangu</strong> is constituted under the Khyber Pakhtunkhwa Elementary & Secondary Education Department regulations to ensure community participation, transparent fund utilization, and institutional development.
+          </p>
+
+          <div style="background:var(--bg); padding:12px; border-radius:var(--radius-md); border-left:4px solid var(--primary);">
+            <strong>Permissible Heads of PTC Expenditure:</strong>
+            <ul style="margin-left:18px; margin-top:6px;">
+              <li>Minor Civil & Sanitary Repairs (classrooms, toilets, water supply).</li>
+              <li>Stationery & Teaching Learning Materials (registers, whiteboards, markers, chalk).</li>
+              <li>Student Furniture repair and replacement (desks, benches, chairs).</li>
+              <li>School equipment, emergency electric repairs, and co-curricular materials.</li>
+              <li>Needy and deserving student welfare support.</li>
+            </ul>
+          </div>
+
+          <div style="background:var(--bg); padding:12px; border-radius:var(--radius-md); border-left:4px solid var(--accent-gold);">
+            <strong>Auditing & Record Keeping Requirements:</strong>
+            <ul style="margin-left:18px; margin-top:6px;">
+              <li>Every expenditure must have an approved resolution signed by the Chairman and members.</li>
+              <li>A sequential Voucher/Receipt Number must be allocated to every rupee received or spent.</li>
+              <li>All payments above prescribed thresholds require authentic GST/NTN vendor cash memos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Action Button for Instant Entry -->
+  <button class="fab-btn no-print" onclick="openTransactionModal()" aria-label="Add Transaction">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+  </button>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="bottom-nav no-print" aria-label="Mobile Navigation">
+    <button class="bnav-item active" onclick="switchTab('dashboard')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="bnav-item" onclick="switchTab('ledger')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      <span>Ledger</span>
+    </button>
+    <button class="bnav-item" onclick="openTransactionModal()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+      <span>New Entry</span>
+    </button>
+    <button class="bnav-item" onclick="switchTab('reports')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+      <span>Reports</span>
+    </button>
+    <button class="bnav-item" onclick="switchTab('backup')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+      <span>Backup</span>
+    </button>
+  </nav>
+
+  <!-- ADD / EDIT TRANSACTION MODAL -->
+  <div id="txModalBackdrop" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 id="modalTitle" class="modal-title">New Transaction</h3>
+        <button class="modal-close-btn" onclick="closeTransactionModal()">&times;</button>
+      </div>
+
+      <form id="txForm" onsubmit="handleSaveTransaction(event)">
+        <div class="modal-body">
+          <input type="hidden" id="editTxId" value="">
+
+          <!-- Transaction Type Selection -->
+          <div class="type-toggle-group">
+            <button type="button" id="btnTypeIncome" class="type-toggle-btn income" onclick="selectType('income')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+              Income (+)
+            </button>
+            <button type="button" id="btnTypeExpense" class="type-toggle-btn expense selected" onclick="selectType('expense')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/></svg>
+              Expense (-)
+            </button>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div class="form-group">
+              <label for="formDate">Date *</label>
+              <input type="date" id="formDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="formVoucherNo">Voucher / Receipt # *</label>
+              <input type="text" id="formVoucherNo" class="form-control" placeholder="e.g. VR-2024-01" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="formDescription">Description / Particulars / Payee *</label>
+            <input type="text" id="formDescription" class="form-control" placeholder="e.g. Science lab chemical repair / Cement bags" required>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:10px;">
+            <div class="form-group">
+              <label for="formCategory">Category *</label>
+              <select id="formCategory" class="form-control" required>
+                <!-- Populated dynamically based on type -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="formAmount">Amount (PKR ₨) *</label>
+              <input type="number" id="formAmount" class="form-control" min="0.01" step="any" placeholder="0.00" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="formRemarks">Remarks / Meeting Resolution Reference</label>
+            <input type="text" id="formRemarks" class="form-control" placeholder="e.g. Approved in PTC meeting dated 15-Oct, resolution #4">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeTransactionModal()">Cancel</button>
+          <button type="submit" id="btnSaveTx" class="btn btn-primary">Save Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SINGLE VOUCHER SLIP PREVIEW MODAL -->
+  <div id="voucherModalBackdrop" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 class="modal-title">Official Voucher Slip</h3>
+        <button class="modal-close-btn" onclick="closeVoucherModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="voucherSlipContainer">
+        <!-- Rendered voucher slip content -->
+      </div>
+      <div class="modal-footer no-print">
+        <button type="button" class="btn btn-outline" onclick="closeVoucherModal()">Close</button>
+        <button type="button" class="btn btn-primary" onclick="triggerPrint()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Print Slip
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="appToast" class="toast">
+    <span id="toastMessage">Action completed</span>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       GHS Kotki Bala PTC Fund Management System
+       Self-Contained Offline IndexedDB Architecture
+       ========================================================================== */
+
+    const DB_NAME = 'GHSKotkiBalaPTCFundDB';
+    const DB_VERSION = 1;
+    const STORE_NAME = 'transactions';
+
+    const CATEGORIES = {
+      income: [
+        'Govt PTC Grant',
+        'Farogh-e-Taleem Fund (FTF)',
+        'Community & Donations',
+        'Exam Fee Share',
+        'Other Income'
+      ],
+      expense: [
+        'School Purchases',
+        'Repairs & Maintenance',
+        'Stationery & Printing',
+        'Furniture & Fixtures',
+        'Sanitation & Utilities',
+        'Student Welfare',
+        'Other Expenses'
+      ]
+    };
+
+    let dbInstance = null;
+    let allTransactions = [];
+    let currentFilterType = 'all';
+    let currentActiveTab = 'dashboard';
+    let currentSelectedTxType = 'expense';
+
+    // -------------------------------------------------------------
+    // IndexedDB Layer
+    // -------------------------------------------------------------
+    function openDatabase() {
+      return new Promise((resolve, reject) => {
+        if (dbInstance) {
+          resolve(dbInstance);
+          return;
+        }
+
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            const store = db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+            store.createIndex('date', 'date', { unique: false });
+            store.createIndex('type', 'type', { unique: false });
+            store.createIndex('category', 'category', { unique: false });
+            store.createIndex('receiptNumber', 'receiptNumber', { unique: false });
+          }
+        };
+
+        request.onsuccess = (event) => {
+          dbInstance = event.target.result;
+          resolve(dbInstance);
+        };
+
+        request.onerror = (event) => {
+          console.error('[IndexedDB Error]', event.target.error);
+          reject(event.target.error);
+        };
+      });
+    }
+
+    async function dbGetAllTransactions() {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readonly');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function dbAddTransaction(transaction) {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.add(transaction);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function dbUpdateTransaction(transaction) {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.put(transaction);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function dbDeleteTransaction(id) {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.delete(id);
+        req.onsuccess = () => resolve(true);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function dbClearAll() {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.clear();
+        req.onsuccess = () => resolve(true);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Formatters
+    // -------------------------------------------------------------
+    function formatPKR(val) {
+      const num = Number(val) || 0;
+      return num.toLocaleString('en-PK', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('appToast');
+      const text = document.getElementById('toastMessage');
+      text.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // -------------------------------------------------------------
+    // Navigation / Tabs
+    // -------------------------------------------------------------
+    function switchTab(tabId) {
+      currentActiveTab = tabId;
+      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.style.display = 'block';
+
+      // Update Tab Bar
+      document.querySelectorAll('.nav-tabs .tab-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(tabId));
+      });
+
+      // Update Mobile Bottom Nav
+      document.querySelectorAll('.bottom-nav .bnav-item').forEach((btn) => {
+        const onclickAttr = btn.getAttribute('onclick') || '';
+        btn.classList.toggle('active', onclickAttr.includes(tabId));
+      });
+
+      if (tabId === 'reports') {
+        renderAuditReport();
+      } else if (tabId === 'ledger') {
+        applyFilters();
+      } else if (tabId === 'backup') {
+        updateBackupStats();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // -------------------------------------------------------------
+    // UI Renderers: Dashboard & Lists
+    // -------------------------------------------------------------
+    async function loadData() {
+      try {
+        allTransactions = await dbGetAllTransactions();
+        // Sort newest first by default
+        allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date) || (b.id - a.id));
+        updateDashboard();
+        applyFilters();
+        updateBackupStats();
+      } catch (err) {
+        console.error('Failed to load transactions from IndexedDB', err);
+        showToast('Error accessing local database');
+      }
+    }
+
+    function updateDashboard() {
+      let totalIncome = 0;
+      let totalExpense = 0;
+      let incomeCount = 0;
+      let expenseCount = 0;
+
+      allTransactions.forEach(t => {
+        const amt = Number(t.amount) || 0;
+        if (t.type === 'income') {
+          totalIncome += amt;
+          incomeCount++;
+        } else {
+          totalExpense += amt;
+          expenseCount++;
+        }
+      });
+
+      const balance = totalIncome - totalExpense;
+
+      document.getElementById('dashIncome').textContent = formatPKR(totalIncome);
+      document.getElementById('dashExpense').textContent = formatPKR(totalExpense);
+      document.getElementById('dashBalance').textContent = formatPKR(balance);
+
+      document.getElementById('dashIncomeCount').textContent = `${incomeCount} income receipt${incomeCount === 1 ? '' : 's'}`;
+      document.getElementById('dashExpenseCount').textContent = `${expenseCount} expense voucher${expenseCount === 1 ? '' : 's'}`;
+
+      const statusEl = document.getElementById('dashBalanceStatus');
+      if (balance > 0) {
+        statusEl.textContent = 'Active Surplus available for school projects';
+        statusEl.style.color = 'var(--income-green)';
+      } else if (balance === 0) {
+        statusEl.textContent = 'Account balanced (₨ 0.00)';
+        statusEl.style.color = 'var(--text-muted)';
+      } else {
+        statusEl.textContent = 'Deficit: Expenses exceed allocated funds';
+        statusEl.style.color = 'var(--expense-red)';
+      }
+
+      // Recent 5 transactions
+      const recent = allTransactions.slice(0, 5);
+      const container = document.getElementById('recentTransactionsList');
+      document.getElementById('recentCount').textContent = recent.length;
+
+      if (recent.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            <div class="empty-title">No transactions recorded yet</div>
+            <div class="empty-desc">Your official PTC fund ledger is clean and ready. Click Record Income or Record Expense to create your first entry.</div>
+            <button class="btn btn-primary btn-sm" onclick="openTransactionModal()">+ Record First Transaction</button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = recent.map(tx => renderTransactionCard(tx)).join('');
+      }
+    }
+
+    function renderTransactionCard(tx) {
+      const isIncome = tx.type === 'income';
+      const badgeClass = isIncome ? 'income' : 'expense';
+      const badgeText = isIncome ? 'Income (+)' : 'Expense (-)';
+      const amountSign = isIncome ? '+ ' : '- ';
+
+      return `
+        <article class="tx-card">
+          <div class="tx-card-top">
+            <div class="tx-details">
+              <div>
+                <span class="tx-badge ${badgeClass}">${badgeText}</span>
+                <span class="tx-voucher-chip">${escapeHtml(tx.receiptNumber || 'N/A')}</span>
+              </div>
+              <div class="tx-desc">${escapeHtml(tx.description)}</div>
+              <div class="tx-category">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                ${escapeHtml(tx.category)}
+              </div>
+            </div>
+            <div class="tx-amount-col">
+              <div class="tx-amount ${badgeClass}">${amountSign}₨ ${formatPKR(tx.amount)}</div>
+              <div class="tx-date">${formatDate(tx.date)}</div>
+            </div>
+          </div>
+          ${tx.remarks ? `<div class="tx-remarks"><strong>Remarks:</strong> ${escapeHtml(tx.remarks)}</div>` : ''}
+          <div class="tx-actions no-print">
+            <button class="action-icon-btn primary" onclick="previewVoucher(${tx.id})">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+              Voucher Slip
+            </button>
+            <button class="action-icon-btn" onclick="editTransaction(${tx.id})">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+              Edit
+            </button>
+            <button class="action-icon-btn danger" onclick="confirmDeleteTransaction(${tx.id})">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+              Delete
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // -------------------------------------------------------------
+    // Filters & Search
+    // -------------------------------------------------------------
+    function setTypeFilter(type, btn) {
+      currentFilterType = type;
+      document.querySelectorAll('.filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const search = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const cat = document.getElementById('categoryFilter').value;
+      const dateFrom = document.getElementById('dateFromFilter').value;
+      const dateTo = document.getElementById('dateToFilter').value;
+      const sortBy = document.getElementById('sortBySelect').value;
+
+      let filtered = allTransactions.filter(item => {
+        // Type filter
+        if (currentFilterType !== 'all' && item.type !== currentFilterType) return false;
+
+        // Category filter
+        if (cat !== 'all' && item.category !== cat) return false;
+
+        // Date range
+        if (dateFrom && item.date < dateFrom) return false;
+        if (dateTo && item.date > dateTo) return false;
+
+        // Search text
+        if (search) {
+          const matchDesc = (item.description || '').toLowerCase().includes(search);
+          const matchVoucher = (item.receiptNumber || '').toLowerCase().includes(search);
+          const matchRemarks = (item.remarks || '').toLowerCase().includes(search);
+          const matchCat = (item.category || '').toLowerCase().includes(search);
+          if (!matchDesc && !matchVoucher && !matchRemarks && !matchCat) return false;
+        }
+
+        return true;
+      });
+
+      // Sorting
+      filtered.sort((a, b) => {
+        if (sortBy === 'date-desc') return new Date(b.date) - new Date(a.date) || (b.id - a.id);
+        if (sortBy === 'date-asc') return new Date(a.date) - new Date(b.date) || (a.id - b.id);
+        if (sortBy === 'amount-desc') return (Number(b.amount) || 0) - (Number(a.amount) || 0);
+        if (sortBy === 'amount-asc') return (Number(a.amount) || 0) - (Number(b.amount) || 0);
+        return 0;
+      });
+
+      document.getElementById('filteredRecordsCount').textContent = filtered.length;
+      const container = document.getElementById('transactionsList');
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <div class="empty-title">No matching records found</div>
+            <div class="empty-desc">Try clearing your search query or adjusting the filters above.</div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = filtered.map(tx => renderTransactionCard(tx)).join('');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Add / Edit Modal & Actions
+    // -------------------------------------------------------------
+    function openTransactionModal(preferredType = 'expense') {
+      document.getElementById('editTxId').value = '';
+      document.getElementById('modalTitle').textContent = 'New Transaction';
+      document.getElementById('txForm').reset();
+
+      // Default date = today
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('formDate').value = today;
+
+      selectType(preferredType);
+
+      // Auto-suggest next sequential voucher number
+      suggestVoucherNumber(preferredType);
+
+      document.getElementById('txModalBackdrop').classList.add('open');
+    }
+
+    function suggestVoucherNumber(type) {
+      const prefix = type === 'income' ? 'REC' : 'VR';
+      const year = new Date().getFullYear();
+      const existing = allTransactions
+        .filter(t => t.type === type && (t.receiptNumber || '').startsWith(prefix))
+        .length;
+      const nextNum = String(existing + 1).padStart(3, '0');
+      document.getElementById('formVoucherNo').value = `${prefix}-${year}-${nextNum}`;
+    }
+
+    function selectType(type) {
+      currentSelectedTxType = type;
+      const btnInc = document.getElementById('btnTypeIncome');
+      const btnExp = document.getElementById('btnTypeExpense');
+
+      if (type === 'income') {
+        btnInc.classList.add('selected');
+        btnExp.classList.remove('selected');
+      } else {
+        btnExp.classList.add('selected');
+        btnInc.classList.remove('selected');
+      }
+
+      populateCategoryDropdown(type);
+    }
+
+    function populateCategoryDropdown(type, selectedCategory = '') {
+      const catSelect = document.getElementById('formCategory');
+      catSelect.innerHTML = '';
+      const list = CATEGORIES[type] || [];
+      list.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        if (c === selectedCategory) opt.selected = true;
+        catSelect.appendChild(opt);
+      });
+    }
+
+    function closeTransactionModal() {
+      document.getElementById('txModalBackdrop').classList.remove('open');
+    }
+
+    async function handleSaveTransaction(event) {
+      event.preventDefault();
+
+      const editId = document.getElementById('editTxId').value;
+      const date = document.getElementById('formDate').value;
+      const voucherNo = document.getElementById('formVoucherNo').value.trim();
+      const desc = document.getElementById('formDescription').value.trim();
+      const category = document.getElementById('formCategory').value;
+      const amount = parseFloat(document.getElementById('formAmount').value);
+      const remarks = document.getElementById('formRemarks').value.trim();
+
+      if (!date || !voucherNo || !desc || !category || isNaN(amount) || amount <= 0) {
+        showToast('Please fill all required fields with valid values');
+        return;
+      }
+
+      const txRecord = {
+        type: currentSelectedTxType,
+        date: date,
+        receiptNumber: voucherNo,
+        description: desc,
+        category: category,
+        amount: amount,
+        remarks: remarks,
+        updatedAt: new Date().toISOString()
+      };
+
+      try {
+        if (editId) {
+          txRecord.id = Number(editId);
+          await dbUpdateTransaction(txRecord);
+          showToast('Transaction updated successfully');
+        } else {
+          txRecord.createdAt = new Date().toISOString();
+          await dbAddTransaction(txRecord);
+          showToast('Transaction recorded successfully');
+        }
+
+        closeTransactionModal();
+        await loadData();
+      } catch (err) {
+        console.error('Failed to save record to IndexedDB', err);
+        showToast('Error saving record');
+      }
+    }
+
+    function editTransaction(id) {
+      const item = allTransactions.find(t => t.id === id);
+      if (!item) return;
+
+      document.getElementById('editTxId').value = item.id;
+      document.getElementById('modalTitle').textContent = 'Edit Transaction';
+      document.getElementById('formDate').value = item.date;
+      document.getElementById('formVoucherNo').value = item.receiptNumber;
+      document.getElementById('formDescription').value = item.description;
+      document.getElementById('formAmount').value = item.amount;
+      document.getElementById('formRemarks').value = item.remarks || '';
+
+      selectType(item.type);
+      populateCategoryDropdown(item.type, item.category);
+
+      document.getElementById('txModalBackdrop').classList.add('open');
+    }
+
+    async function confirmDeleteTransaction(id) {
+      const item = allTransactions.find(t => t.id === id);
+      if (!item) return;
+
+      const confirmMsg = `Delete ${item.type.toUpperCase()} record (${item.receiptNumber}) for ₨ ${formatPKR(item.amount)}?\n\nThis cannot be undone.`;
+      if (confirm(confirmMsg)) {
+        try {
+          await dbDeleteTransaction(id);
+          showToast('Transaction deleted');
+          await loadData();
+        } catch (err) {
+          console.error('Failed to delete from IndexedDB', err);
+          showToast('Failed to delete transaction');
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Single Voucher Slip Preview
+    // -------------------------------------------------------------
+    function previewVoucher(id) {
+      const item = allTransactions.find(t => t.id === id);
+      if (!item) return;
+
+      const isIncome = item.type === 'income';
+      const typeLabel = isIncome ? 'CASH RECEIPT VOUCHER' : 'PAYMENT EXPENDITURE VOUCHER';
+
+      const html = `
+        <div class="voucher-slip">
+          <div class="voucher-slip-header">
+            <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted);">Govt of Khyber Pakhtunkhwa • E&SE Dept</div>
+            <h3 style="font-size:17px; font-weight:800; color:var(--primary); margin:2px 0;">Government High School Kotki Bala Hangu</h3>
+            <div style="font-size:13px; font-weight:700; color:var(--text-main); text-decoration:underline;">PARENT TEACHER COUNCIL (PTC) ${typeLabel}</div>
+          </div>
+
+          <div class="voucher-row">
+            <div><strong>Voucher/Rec No:</strong> <span class="voucher-val">${escapeHtml(item.receiptNumber)}</span></div>
+            <div><strong>Date:</strong> <span class="voucher-val">${formatDate(item.date)}</span></div>
+          </div>
+
+          <div class="voucher-row">
+            <div><strong>${isIncome ? 'Received From:' : 'Paid To / Vendor:'}</strong> <span class="voucher-val">${escapeHtml(item.description)}</span></div>
+            <div><strong>Head/Category:</strong> <span class="voucher-val">${escapeHtml(item.category)}</span></div>
+          </div>
+
+          <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:12px; margin:12px 0;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:14px; font-weight:600;">Net Amount:</span>
+              <span style="font-size:18px; font-weight:800; color:${isIncome ? 'var(--income-green)' : 'var(--expense-red)'};">PKR ₨ ${formatPKR(item.amount)}</span>
+            </div>
+            ${item.remarks ? `<div style="font-size:12px; color:var(--text-muted); margin-top:6px; border-top:1px dashed #DDD; padding-top:4px;"><strong>Approval / Meeting Reference:</strong> ${escapeHtml(item.remarks)}</div>` : ''}
+          </div>
+
+          <div class="signature-block" style="margin-top:34px;">
+            <div>
+              <div class="sig-line">Prepared / Verified By</div>
+              <div class="sig-sub">Teacher Incharge PTC</div>
+            </div>
+            <div>
+              <div class="sig-line">Approved for Payment</div>
+              <div class="sig-sub">Headmaster / Chairman PTC</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('voucherSlipContainer').innerHTML = html;
+      document.getElementById('voucherModalBackdrop').classList.add('open');
+    }
+
+    function closeVoucherModal() {
+      document.getElementById('voucherModalBackdrop').classList.remove('open');
+    }
+
+    // -------------------------------------------------------------
+    // Audit Ledger Report Generator
+    // -------------------------------------------------------------
+    function renderAuditReport() {
+      const today = new Date();
+      document.getElementById('reportGenDate').textContent = today.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+      document.getElementById('reportTxCount').textContent = allTransactions.length;
+
+      // Sort chronological (oldest to newest) for accurate running balance ledger
+      const chronological = [...allTransactions].sort((a, b) => new Date(a.date) - new Date(b.date) || (a.id - b.id));
+
+      let runningBalance = 0;
+      let totalInc = 0;
+      let totalExp = 0;
+
+      const rowsHtml = chronological.map(item => {
+        const amt = Number(item.amount) || 0;
+        let incStr = '-';
+        let expStr = '-';
+
+        if (item.type === 'income') {
+          totalInc += amt;
+          runningBalance += amt;
+          incStr = formatPKR(amt);
+        } else {
+          totalExp += amt;
+          runningBalance -= amt;
+          expStr = formatPKR(amt);
+        }
+
+        return `
+          <tr>
+            <td>${formatDate(item.date)}</td>
+            <td><code>${escapeHtml(item.receiptNumber)}</code></td>
+            <td>
+              <strong>${escapeHtml(item.description)}</strong>
+              ${item.remarks ? `<br><small style="color:#666;">(${escapeHtml(item.remarks)})</small>` : ''}
+            </td>
+            <td>${escapeHtml(item.category)}</td>
+            <td style="text-align:right;">${incStr}</td>
+            <td style="text-align:right;">${expStr}</td>
+            <td style="text-align:right; font-weight:700;">${formatPKR(runningBalance)}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('reportTableBody').innerHTML = rowsHtml || `<tr><td colspan="7" style="text-align:center; padding:20px; color:#999;">No transaction records available.</td></tr>`;
+      document.getElementById('reportTotalIncome').textContent = formatPKR(totalInc);
+      document.getElementById('reportTotalExpense').textContent = formatPKR(totalExp);
+      document.getElementById('reportClosingBalance').textContent = '₨ ' + formatPKR(runningBalance);
+    }
+
+    function triggerPrint() {
+      if (window.AndroidAppBridge && typeof window.AndroidAppBridge.printDocument === 'function') {
+        window.AndroidAppBridge.printDocument();
+      } else {
+        window.print();
+      }
+    }
+
+    // -------------------------------------------------------------
+    // CSV Export
+    // -------------------------------------------------------------
+    function exportCSV() {
+      if (allTransactions.length === 0) {
+        showToast('No transactions to export');
+        return;
+      }
+
+      // Chronological
+      const sorted = [...allTransactions].sort((a, b) => new Date(a.date) - new Date(b.date) || (a.id - b.id));
+
+      let runningBal = 0;
+      const headers = ['Date', 'Type', 'Voucher Number', 'Category', 'Description', 'Income (PKR)', 'Expense (PKR)', 'Running Balance (PKR)', 'Remarks'];
+
+      const rows = sorted.map(t => {
+        const amt = Number(t.amount) || 0;
+        let inc = 0;
+        let exp = 0;
+        if (t.type === 'income') {
+          inc = amt;
+          runningBal += amt;
+        } else {
+          exp = amt;
+          runningBal -= amt;
+        }
+
+        return [
+          t.date,
+          t.type.toUpperCase(),
+          cleanCSV(t.receiptNumber),
+          cleanCSV(t.category),
+          cleanCSV(t.description),
+          inc.toFixed(2),
+          exp.toFixed(2),
+          runningBal.toFixed(2),
+          cleanCSV(t.remarks || '')
+        ].join(',');
+      });
+
+      // UTF-8 BOM for Microsoft Excel compatibility
+      const csvContent = '\uFEFF' + headers.join(',') + '\n' + rows.join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const today = new Date().toISOString().split('T')[0];
+      link.setAttribute('href', url);
+      link.setAttribute('download', `GHS_Kotki_Bala_PTC_Ledger_${today}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToast('CSV report downloaded successfully');
+    }
+
+    function cleanCSV(str) {
+      if (!str) return '""';
+      const clean = String(str).replace(/"/g, '""');
+      return `"${clean}"`;
+    }
+
+    // -------------------------------------------------------------
+    // Backup & Restore (JSON)
+    // -------------------------------------------------------------
+    function downloadJSONBackup() {
+      if (allTransactions.length === 0) {
+        showToast('No records to backup');
+        return;
+      }
+
+      const backupData = {
+        appName: 'GHS Kotki Bala PTC Fund',
+        school: 'Government High School Kotki Bala Hangu',
+        version: '1.0',
+        exportedAt: new Date().toISOString(),
+        totalRecords: allTransactions.length,
+        transactions: allTransactions
+      };
+
+      const jsonStr = JSON.stringify(backupData, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const today = new Date().toISOString().split('T')[0];
+      link.setAttribute('href', url);
+      link.setAttribute('download', `ghs_kotki_bala_ptc_fund_backup_${today}.json`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToast('Full backup file downloaded');
+    }
+
+    function handleRestoreFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          const list = imported.transactions || imported;
+          if (!Array.isArray(list)) {
+            throw new Error('Invalid backup file format');
+          }
+
+          const action = confirm(
+            `Found ${list.length} transactions in backup.\n\nClick OK to REPLACE current data, or CANCEL to MERGE with current data.`
+          );
+
+          if (action) {
+            // Replace
+            await dbClearAll();
+            for (const item of list) {
+              const copy = { ...item };
+              delete copy.id; // allow clean auto-increment
+              await dbAddTransaction(copy);
+            }
+            showToast(`Replaced all records with ${list.length} imported items`);
+          } else {
+            // Merge
+            for (const item of list) {
+              const copy = { ...item };
+              delete copy.id;
+              await dbAddTransaction(copy);
+            }
+            showToast(`Merged ${list.length} records into ledger`);
+          }
+
+          event.target.value = '';
+          await loadData();
+        } catch (err) {
+          console.error('Failed to restore backup', err);
+          alert('Error restoring backup file: ' + err.message);
+          event.target.value = '';
+        }
+      };
+
+      reader.readAsText(file);
+    }
+
+    function updateBackupStats() {
+      const el = document.getElementById('backupRecordCount');
+      if (el) el.textContent = allTransactions.length;
+    }
+
+    // -------------------------------------------------------------
+    // Offline Status & Service Worker Registration
+    // -------------------------------------------------------------
+    function updateNetworkStatus() {
+      const dot = document.getElementById('networkStatusDot');
+      const text = document.getElementById('networkStatusText');
+      if (navigator.onLine) {
+        dot.classList.remove('offline');
+        text.textContent = 'Online';
+      } else {
+        dot.classList.add('offline');
+        text.textContent = 'Offline (Local)';
+      }
+    }
+
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+
+    // Register Service Worker for true PWA offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(reg => {
+            console.log('[PTC PWA] Service Worker registered successfully', reg.scope);
+          })
+          .catch(err => {
+            console.warn('[PTC PWA] Service Worker registration failed (normal on file:// or preview iframe)', err);
+          });
+      });
+    }
+
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNetworkStatus();
+      loadData();
+    });
+  </script>
+</body>
+</html>
